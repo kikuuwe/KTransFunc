@@ -3,13 +3,13 @@
  
  Author: Ryo Kikuuwe
  
- Copyright (c) 2000-2015  Ryo Kikuuwe
+ Copyright (c) 2000-2015 Ryo Kikuuwe
 
  KTransFunc is a set of functions that deals with transfer functions
  in the Z-transform domain.
   
  KTransFunc is a free software; you can redistribute it and/or modify
- it under the terms of the Lesser GNU General Public License as published by
+ it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
  (at your option) any later version.
  KTransFunc is distributed in the hope that it will be useful,
@@ -17,7 +17,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
  
- You should have received a copy of the Lesser GNU General Public License
+ You should have received a copy of the GNU Lesser General Public License
  along with SiconosPlugin; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  
