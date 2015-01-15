@@ -11,8 +11,6 @@
 
 #include "math.h"
 
-///////////////////////////////////////////////////////////////
-
 class KTransFunc
 {
  public:
@@ -24,6 +22,7 @@ class KTransFunc
     double * mA ;
   public:
     KTransFunc() :N(-1),M(-1),in(NULL),out(NULL),mB(NULL),mA(NULL) {}
+  /************************************************************************/  
     void Construct(int aN, int aM)
     {
       Destruct();
@@ -36,6 +35,7 @@ class KTransFunc
       mA[0] = 1;
       Reset();
     }
+  /************************************************************************/  
     void Destruct()
     {
       if(in !=NULL) delete [] in  ; in  = NULL ;
@@ -45,41 +45,38 @@ class KTransFunc
       N=-1;
       M=-1;
     }
+  /************************************************************************/  
     virtual ~KTransFunc()
     {
       Destruct();
     }
+  /************************************************************************/  
     void Reset()
     {
       if((M==-1)||(N==-1)) return;
       {for(int p=0;p<=N;p++) in [p]=0;}
       {for(int p=0;p<=M;p++) out[p]=0;}
     };
+  /************************************************************************/  
     double Work(double inValue)
     {
-		if(in == NULL) perror("Transfunc Not Allocated \n");
+	if(in == NULL) perror("Transfunc Not Allocated \n");
         {for(int p=N-1 ;p>=0 ;p--) in [p+1]=in[p];}
         {for(int p=M-1 ;p>=0 ;p--) out[p+1]=out[p];}
         in [0] = inValue;
         out[0] = 0  ;
         {for(int p=N ;p>=0 ;p--) out[0] += mB[p] * in [p] ;}
         {for(int p=M ;p>=1 ;p--) out[0] -= mA[p] * out[p] ;}
-		return out[0];
+	return out[0];
     }
   /************************************************************************/  
     void init_multiply(const KTransFunc& T1,const KTransFunc& T2)
     {
       Construct(T1.N + T2.N, T1.M + T2.M);
-      {for(int p=0;p<=N;p++) mB[p]=0;}
-      {for(int p=0;p<=M;p++) mA[p]=0;}
-      {for(int i=0;i<= T1.N ;i++)for(int j=0;j<= T2.N ;j++)
-        {
-           mB[i+j] += T1.mB[i] * T2.mB[j] ;
-        }}
-      {for(int i=0;i<= T1.M ;i++)for(int j=0;j<= T2.M ;j++)
-      {
-         mA[i+j] += T1.mA[i] * T2.mA[j] ;
-      }}
+      {for(int p=0;p<=N   ;p++)mB[p]=0;}
+      {for(int p=0;p<=M   ;p++)mA[p]=0;}
+      {for(int i=0;i<=T1.N;i++)for(int j=0;j<=T2.N;j++)mB[i+j]+=T1.mB[i]*T2.mB[j];}
+      {for(int i=0;i<=T1.M;i++)for(int j=0;j<=T2.M;j++)mA[i+j]+=T1.mA[i]*T2.mA[j];}
     }
   /************************************************************************/  
     void pile_multiply(const KTransFunc& T1)
@@ -116,10 +113,6 @@ class KTransFunc
     }
   /************************************************************************/  
 };
-///////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 class KDifferentiate
 {
