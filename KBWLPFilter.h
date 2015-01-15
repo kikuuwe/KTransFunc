@@ -13,13 +13,13 @@
 
 class KBWLPFilter
 {
-	public:
-	static void Make(KTransFunc* pTF, int Order,double aDeltaT ,double aHerz)
+  public:
+  static void Make(KTransFunc* pTF, int Order,double aDeltaT ,double aHerz)
 	{
 	 //	pTF->Construct(((Order==1)?0:Order) , Order);
 	 	pTF->Construct(Order , Order);
-		if(aHerz<=0)
-		{
+    if(aHerz<=0)
+  {
 			pTF->mB[0] = 1. ;
 			for(int p=1;p<=pTF->N;p++) pTF->mB[p]=0.;
 			for(int p=1;p<=pTF->M;p++) pTF->mA[p]=0.;
