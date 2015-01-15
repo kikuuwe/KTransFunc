@@ -1,16 +1,35 @@
-/*
- *
- *  KTransFunc
- *
- *  Copyright (c) 2000 Ryo Kikuuwe
- *
- */
+/* 
+ This file is a part of KTransFunc.
+ 
+ Author: Ryo Kikuuwe
+ 
+ Copyright (c) 2000-2015  Ryo Kikuuwe
+
+ KTransFunc is a set of functions that deals with transfer functions
+ in the Z-transform domain.
+  
+ KTransFunc is a free software; you can redistribute it and/or modify
+ it under the terms of the Lesser GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ KTransFunc is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the Lesser GNU General Public License
+ along with SiconosPlugin; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ 
+ Contact: Ryo Kikuuwe, kikuuwe@ieee.org
+*/
 
 #ifndef Headder_KTransFunc
 #define Headder_KTransFunc
 
 #include "math.h"
 
+///////////////////////////////////////////////////////////////
 class KTransFunc
 {
  public:
@@ -26,8 +45,8 @@ class KTransFunc
     void Construct(int aN, int aM)
     {
       Destruct();
-      N = aN;
-      M = aM ;
+      N   = aN;
+      M   = aM;
       in  = new double[N+1];
       out = new double[M+1];
       mB  = new double[N+1];
@@ -38,10 +57,10 @@ class KTransFunc
   /************************************************************************/  
     void Destruct()
     {
-      if(in !=NULL) delete [] in  ; in  = NULL ;
-      if(out!=NULL) delete [] out ; out = NULL ;
-      if(mB !=NULL) delete [] mB  ; mB  = NULL ;
-      if(mA !=NULL) delete [] mA  ; mA  = NULL ;
+      if(in !=NULL) delete [] in  ; in  = NULL;
+      if(out!=NULL) delete [] out ; out = NULL;
+      if(mB !=NULL) delete [] mB  ; mB  = NULL;
+      if(mA !=NULL) delete [] mA  ; mA  = NULL;
       N=-1;
       M=-1;
     }
@@ -70,7 +89,7 @@ class KTransFunc
 	return out[0];
     }
   /************************************************************************/  
-    void init_multiply(const KTransFunc& T1,const KTransFunc& T2)
+    void init_multiply(const KTransFunc& T1, const KTransFunc& T2)
     {
       Construct(T1.N + T2.N, T1.M + T2.M);
       {for(int p=0;p<=N   ;p++)mB[p]=0;}
@@ -81,7 +100,8 @@ class KTransFunc
   /************************************************************************/  
     void pile_multiply(const KTransFunc& T1)
     {
-      KTransFunc tmp; tmp.init_multiply(*this, T1);
+      KTransFunc tmp;
+      tmp.init_multiply(*this, T1);
       this->init_copy(tmp);
     }
   /************************************************************************/  
@@ -116,14 +136,14 @@ class KTransFunc
 ///////////////////////////////////////////////////////////////
 class KDifferentiate
 {
-        public:
-        static void Make(KTransFunc* const pTF, double aDeltaT) 
-        {
-            pTF->Construct(1,0);
-            pTF->mB[0] =  1./aDeltaT;
-            pTF->mB[1] = -1./aDeltaT;
-            pTF->Reset();
-        }
+  public:
+  static void Make(KTransFunc* const pTF, double aDeltaT) 
+  {
+    pTF->Construct(1,0);
+    pTF->mB[0] =  1./aDeltaT;
+    pTF->mB[1] = -1./aDeltaT;
+    pTF->Reset();
+  }
 };
 ///////////////////////////////////////////////////////////////
 #endif
