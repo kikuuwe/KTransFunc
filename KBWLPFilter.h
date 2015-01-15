@@ -15,8 +15,8 @@ class KBWLPFilter
 {
   public:
   static void Make(KTransFunc* pTF, int Order,double aDeltaT ,double aHerz)
-	{
-	 //	pTF->Construct(((Order==1)?0:Order) , Order);
+  {
+    //	pTF->Construct(((Order==1)?0:Order) , Order);
 	 	pTF->Construct(Order , Order);
     if(aHerz<=0)
   {
