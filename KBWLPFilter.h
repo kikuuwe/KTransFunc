@@ -35,7 +35,6 @@ class KBWLPFilter
   /************************************************************************/  
   static void Make(KTransFunc* pTF, int Order, double aDeltaT, double aHerz, int aReallocate=1)
   {
-  // pTF->Construct(((Order==1)?0:Order) , Order);
     if(aHerz<=0)
     {
       if(aReallocate) pTF->Construct(Order , Order);
@@ -45,13 +44,14 @@ class KBWLPFilter
       if(aReallocate) pTF->Reset();
       return;
     }
-    //if(0.5 < aHerz*aDeltaT) logMsg("[Wrn] Cutoff Freq Too Large.\n",0,0,0,0,0,0);
+    if(0.5 < aHerz*aDeltaT) logMsg("[Wrn] Cutoff Freq Too High.\n",0,0,0,0,0,0);
     double tW=2./ aDeltaT * tan( aDeltaT * PI * aHerz );
     double tG=tW * aDeltaT /2;
     if(Order==1)
     {
     //  Integral Approximation
     //  pTF->mB[0] = 1.- exp(-2. * PI * aHerz * aDeltaT )  ;
+    //  pTF->mB[1] = 0 ;
     //  pTF->mA[1] =   - exp(-2. * PI * aHerz * aDeltaT ) ;
       if(aReallocate) pTF->Construct(Order , Order);
       double tW=2./ aDeltaT * tan( aDeltaT * PI * aHerz );
@@ -104,7 +104,7 @@ class KBWLPFilter
       if(aReallocate) pTF->Reset();
       return;
     }
-    pTF->Reset();
+     if(aReallocate) pTF->Reset();
   }
   static void QuickCopy(KTransFunc* pTF, const KTransFunc& aTF)
   {
