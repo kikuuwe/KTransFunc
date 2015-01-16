@@ -98,14 +98,14 @@ class KTransFunc
       {for(int i=0;i<=T1.M;i++)for(int j=0;j<=T2.M;j++)mA[i+j]+=T1.mA[i]*T2.mA[j];}
     }
   /************************************************************************/  
-    void pile_multiply(const KTransFunc& T1)
+    void reus_multiply(const KTransFunc& T1)
     {
       KTransFunc tmp;
       tmp.init_multiply(*this, T1);
       this->init_copy(tmp);
     }
   /************************************************************************/  
-    void pile_times(const double& k)
+    void reus_times(const double& k)
     {
       {for(int i=0;i<=N;i++) mB[i] *= k;}
     }
