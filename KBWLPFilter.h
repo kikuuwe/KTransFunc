@@ -45,7 +45,7 @@ class KBWLPFilter
       return;
     }
     if(0.5 < aHerz*aDeltaT) logMsg("[Wrn] Cutoff Freq Too High.\n",0,0,0,0,0,0);
-    double tW=2./ aDeltaT * tan( aDeltaT * PI * aHerz );
+    double tW=(2./ aDeltaT) * tan( aDeltaT * PI * aHerz );
     double tG=tW * aDeltaT /2;
     if(Order==1)
     {
