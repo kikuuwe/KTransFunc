@@ -44,8 +44,8 @@ class KBWLPFilter
       if(aReallocate) pTF->Reset();
       return;
     }
-    if(0.5 < aHerz*aDeltaT) logMsg("[Wrn] Cutoff Freq Too High.\n",0,0,0,0,0,0);
-    double tW=(2./ aDeltaT) * tan( aDeltaT * PI * aHerz );
+    if(0.5 < aHerz*aDeltaT) perror("[Wrn] Cutoff Freq Too High.\n");
+    double tW=(2./ aDeltaT) * tan( aDeltaT * M_PI * aHerz );
     double tG=tW * aDeltaT /2;
     if(Order==1)
     {
@@ -54,7 +54,7 @@ class KBWLPFilter
     //  pTF->mB[1] = 0 ;
     //  pTF->mA[1] =   - exp(-2. * PI * aHerz * aDeltaT ) ;
       if(aReallocate) pTF->Construct(Order , Order);
-      double tW=2./ aDeltaT * tan( aDeltaT * PI * aHerz );
+      double tW=2./ aDeltaT * tan( aDeltaT * M_PI * aHerz );
       double tDenomi = 1./(tW + 2./aDeltaT) ;
       pTF->mB[0] = tDenomi * tW;
       pTF->mB[1] = pTF->mB[0];
@@ -91,16 +91,16 @@ class KBWLPFilter
     if(Order==4)
     {
       if(aReallocate) pTF->Construct(Order , Order);
-      double tDenomi = 1./(1. + 2.*cos(PI/8)*tG + tG*tG )/(1. + 2.*cos(3.*PI/8)*tG + tG*tG) ;
+      double tDenomi = 1./(1. + 2.*cos(M_PI/8)*tG + tG*tG )/(1. + 2.*cos(3.*M_PI/8)*tG + tG*tG) ;
       pTF->mB[0]= tDenomi * tG*tG*tG*tG ;
       pTF->mB[1]= pTF->mB[0]*4. ;
       pTF->mB[2]= pTF->mB[0]*6. ;
       pTF->mB[3]= pTF->mB[0]*4. ;
       pTF->mB[4]= pTF->mB[0] ;
-      pTF->mA[1]= tDenomi* 4.*(-1. + tG*tG)*(1. + (cos(PI/8) +cos(3.*PI/8)) *tG + tG*tG) ;
+      pTF->mA[1]= tDenomi* 4.*(-1. + tG*tG)*(1. + (cos(M_PI/8) +cos(3.*M_PI/8)) *tG + tG*tG) ;
       pTF->mA[2]= tDenomi* 2.*( 3. - (2.+sqrt(2.))*tG*tG + 3. *tG*tG*tG*tG) ;
-      pTF->mA[3]= tDenomi* 4.*(-1. + tG*tG)*(1. - (cos(PI/8)+cos(3*PI/8)) * tG  + tG*tG)   ;
-      pTF->mA[4]= tDenomi* (1. - 2.*cos(PI/8)*tG + tG*tG) * (1. - 2.*tG*cos(3.*PI/8) + tG*tG)  ;
+      pTF->mA[3]= tDenomi* 4.*(-1. + tG*tG)*(1. - (cos(M_PI/8)+cos(3*M_PI/8)) * tG  + tG*tG)   ;
+      pTF->mA[4]= tDenomi* (1. - 2.*cos(M_PI/8)*tG + tG*tG) * (1. - 2.*tG*cos(3.*M_PI/8) + tG*tG)  ;
       if(aReallocate) pTF->Reset();
       return;
     }
